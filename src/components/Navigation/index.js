@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
+import {Navbar, Nav, Form, Button, FormControl} from 'react-bootstrap';
 
 const Navigation = ({ authUser }) => {
   return(
@@ -21,40 +22,38 @@ const Navigation = ({ authUser }) => {
 const NavigationAuth = () => {
   return(
     <div>
-      <ul>
-        <li>
-          <Link className='nav-text' style={{ textDecoration: 'none', color: 'black' }} to={ROUTES.SIGN_IN}>Sign In  </Link>  {' | '}
-        </li>
-        <li>
-          <Link className='nav-text' style={{ textDecoration: 'none', color: 'black' }} to={ROUTES.LANDING}>Landing </Link> {' | '}
-        </li>
-        <li>
-          <Link className='nav-text' style={{ textDecoration: 'none', color: 'black' }} to={ROUTES.HOME}>Home </Link> {' | '}
-        </li>
-        <li>
-          <Link className='nav-text' style={{ textDecoration: 'none', color: 'black' }} to={ROUTES.ACCOUNT}>Account </Link> {' | '}
-        </li>
-        <li>
-          <Link className='nav-text' style={{ textDecoration: 'none', color: 'black' }} to={ROUTES.ADMIN}>Admin</Link> {' | '}
-        </li>
-        <li>
-          <SignOutButton />
-        </li>
-      </ul>
+      <Navbar bg="primary" variant="dark">
+        <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
+          <Nav className="mr-auto">
+            {/* <Nav.Link to={ROUTES.SIGN_IN}>Sign In  </Nav.Link>   */}
+            <Nav.Link to={ROUTES.LANDING}>Landing </Nav.Link> 
+            <Nav.Link to={ROUTES.HOME}>Home </Nav.Link> 
+            <Nav.Link to={ROUTES.ACCOUNT}>Account </Nav.Link> 
+            <Nav.Link to={ROUTES.ADMIN}>Admin</Nav.Link> 
+            <SignOutButton />
+          </Nav>
+        <Form inline>
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <Button variant="outline-light">Search</Button>
+        </Form>
+      </Navbar>
   </div>
   )
 };
 
 const NavigationNonAuth = () => {
   return(
-    <ul>
-      <li>
-        <Link className='nav-text' style={{ textDecoration: 'none', color: 'black' }} to={ROUTES.LANDING}>Landing </Link> {' | '}
-      </li>
-      <li>
-      <Link className='nav-text' style={{ textDecoration: 'none', color: 'black' }} to={ROUTES.SIGN_IN}>Sign In </Link> {' | '}
-      </li>
-    </ul>
+    <Navbar bg="primary" variant="dark">
+      <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link to={ROUTES.SIGN_IN}>Sign In  </Nav.Link>  
+          <Nav.Link to={ROUTES.LANDING}>Landing </Nav.Link> 
+        </Nav>
+      <Form inline>
+        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+        <Button variant="outline-light">Search</Button>
+      </Form>
+    </Navbar>
   )
 }
 
