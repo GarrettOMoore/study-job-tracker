@@ -19,7 +19,8 @@ const App = () => {
         <main className="App">
           <Router>
             <div>
-              <h1>React + Firebase Auth </h1>
+              <h1>&larr; Study + Job Tracker for Developers &rarr;</h1>
+              <h1>&hearts; &hearts; &hearts;</h1>
               <Navigation />
               <hr />
               <Route exact path={ROUTES.LANDING} component={LandingPage} />
