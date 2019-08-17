@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import {Form, Row, Col, Button} from 'react-bootstrap';
-import { withFirebase } from 'firebase';
-
-const JobTrackerPage = () => (
-  <>
-    {/* <JobTracker /> */}
-  </>
-)
 
 
 const JobTrackerFormBase = (props) => {
 	const {company, position, date, referral, source} = props.jobVars;
 
+	const isInvalid =
+	company === '' ||
+	position === '' ||
+	date === '' ||
+	source === '';
+	
     return(
       <>
         <div className="job-form">
@@ -36,15 +35,13 @@ const JobTrackerFormBase = (props) => {
                 <Form.Control name="source" placeholder="Source" onChange={props.onChange} value={source} />
               </Col>
             </Row>
-            <Button variant="dark" onClick={props.onSubmit}>Submit</Button>
+            <Button variant="dark"  disabled={isInvalid} onClick={props.onSubmit}>Submit</Button>
           </Form>
         </div>
       </>
     )
 };
 
-const JobTrackerForm = withFirebase(JobTrackerFormBase);
 
-export default JobTrackerPage;
+export default JobTrackerFormBase;
 
-export { JobTrackerForm }
