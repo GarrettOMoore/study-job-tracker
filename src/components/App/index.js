@@ -20,7 +20,7 @@ const App = () => {
           <Router>
             <div>
               <h1>Study + Job Tracker for Developers</h1>
-              <h1>&hearts; &hearts; &hearts;</h1>
+              <h3>Made With &hearts; React && Firebase</h3>
               <Navigation />
               <Route exact path={ROUTES.LANDING} component={LandingPage} />
               <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

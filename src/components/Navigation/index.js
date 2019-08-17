@@ -21,21 +21,20 @@ const Navigation = ({ authUser }) => {
 
 const NavigationAuth = () => {
   return(
-    <div>
+    <div className='main-nav'>
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
           <Nav className="mr-auto">
-            {/* <Nav.Link to={ROUTES.SIGN_IN}>Sign In  </Nav.Link>   */}
-            <Nav.Link to={ROUTES.LANDING}>Landing </Nav.Link> 
-            <Nav.Link to={ROUTES.HOME}>Home </Nav.Link> 
-            <Nav.Link to={ROUTES.ACCOUNT}>Account </Nav.Link> 
-            <Nav.Link to={ROUTES.ADMIN}>Admin</Nav.Link> 
+            <Nav.Link as={Link} to={ROUTES.LANDING}>Landing</Nav.Link> 
+            <Nav.Link as={Link} to={ROUTES.HOME}>Home</Nav.Link> 
+            <Nav.Link as={Link} to={ROUTES.ACCOUNT}>Account</Nav.Link> 
+            <Nav.Link as={Link} to={ROUTES.ADMIN}>Admin</Nav.Link> 
             <SignOutButton />
           </Nav>
-        <Form inline>
+        {/* <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-light">Search</Button>
-        </Form>
+        </Form> */}
       </Navbar>
   </div>
   )

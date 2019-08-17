@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 	height: 100vh;
@@ -12,13 +13,27 @@ li {
 	display: inline;
 }
 
-.nav-text, a  {
-	color: black;
-	text-decoration: none;
+table {
+	margin-top: 1rem;
 }
 
-
-
-.nav-text:hover {
-	border-bottom: 2px solid black;
+.main-nav {
+	margin: 2rem 0;
 }
+
+.user-nav {
+	margin: 2rem;
+}
+
+.job-form {
+	margin: 0 auto;
+	width: 50%;
+}
+
+.job-form * {
+	margin: 4px;
+}
+
+.react-bootstrap-table table {
+	table-layout: auto;
+	}
