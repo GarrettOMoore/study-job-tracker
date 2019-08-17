@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table'
 import {Form, Row, Col, Button} from 'react-bootstrap';
+import { withFirebase } from 'firebase';
 
 const INITIAL_STATE = {
   company: '',
@@ -16,41 +17,24 @@ class JobTracker extends Component {
     super(props)
 
     this.state = { ...INITIAL_STATE }
-
   }
 
-  // onSubmit = (event) => {
-  //   const { username, email, passwordOne } = this.state;
-
-  //   this.props.firebase
-  //     .doCreateUserWithEmailAndPassword(email, passwordOne)
-  //     .then(authUser => {
-  //       return this.props.firebase
-  //         .user(authUser.user.uid)
-  //         .set({
-  //           username,
-  //           email,
-  //         });
-  //     }).then(() => {
-  //       this.setState({ ...INITIAL_STATE });
-  //       this.props.history.push(ROUTES.HOME);
-  //     })
-  //     .catch(error => {
-  //       this.setState({ error });
-  //     });
-
-  //   event.preventDefault();
-  // }
+  onSubmit = (event) => {
+    const {company, position, date, referral, source} = this.state;
+    event.preventDefault();
+    // Send New Job Info to Firebase db
+    console.log("submit", this.state)
+    this.setState({ ...INITIAL_STATE });
+  }
 
   onChange = event => {
-    console.log(event.target.name)
-    console.log(event.target.value)
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
   render() {
+    const {company, position, date, referral, source} = this.state;
     return(
       <>
         <div className="job-form">
@@ -58,24 +42,24 @@ class JobTracker extends Component {
           <Form>
             <Row>
               <Col lg={true}>
-                <Form.Control name="company" placeholder="Company" onChange={this.onChange} />
+                <Form.Control name="company" placeholder="Company" onChange={this.onChange} value={company} />
               </Col>
               <Col lg={true}>
-                <Form.Control name="position" placeholder="Position" onChange={this.onChange} />
+                <Form.Control name="position" placeholder="Position" onChange={this.onChange} value={position} />
               </Col>
             </Row>
             <Row>
               <Col lg={true}>
-                <Form.Control name="date" placeholder="Date" onChange={this.onChange} />
+                <Form.Control name="date" placeholder="Date" onChange={this.onChange} value={date} />
               </Col>
               <Col lg={true}>
-                <Form.Control name="referral" placeholder="Referral" onChange={this.onChange} />
+                <Form.Control name="referral" placeholder="Referral" onChange={this.onChange} value={referral} />
               </Col>
               <Col lg={true}>
-                <Form.Control name="source" placeholder="Source" onChange={this.onChange} />
+                <Form.Control name="source" placeholder="Source" onChange={this.onChange} value={source} />
               </Col>
             </Row>
-            <Button variant="dark" type="submit">Submit</Button>
+            <Button variant="dark" onClick={this.onSubmit}>Submit</Button>
           </Form>
         </div>
       <Table responsive>
