@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table'
+import { compose } from 'recompose';
 import {Form, Row, Col, Button} from 'react-bootstrap';
 import { withFirebase } from 'firebase';
+import JobTrackerForm from './form'
+
+const JobTrackerPage = () => (
+  <>
+    <JobTracker />
+  </>
+)
 
 const INITIAL_STATE = {
   company: '',
@@ -20,9 +28,16 @@ class JobTracker extends Component {
   }
 
   onSubmit = (event) => {
-    const {company, position, date, referral, source} = this.state;
     event.preventDefault();
+    const {company, position, date, referral, source} = this.state;
     // Send New Job Info to Firebase db
+    this.props.firebase.jobs.set({
+     company: company,
+     position: position,
+     date: date,
+     referral: referral,
+     source: source,
+    });
     console.log("submit", this.state)
     this.setState({ ...INITIAL_STATE });
   }
@@ -35,33 +50,10 @@ class JobTracker extends Component {
 
   render() {
     const {company, position, date, referral, source} = this.state;
+
     return(
       <>
-        <div className="job-form">
-          <h4>Add New Job</h4>
-          <Form>
-            <Row>
-              <Col lg={true}>
-                <Form.Control name="company" placeholder="Company" onChange={this.onChange} value={company} />
-              </Col>
-              <Col lg={true}>
-                <Form.Control name="position" placeholder="Position" onChange={this.onChange} value={position} />
-              </Col>
-            </Row>
-            <Row>
-              <Col lg={true}>
-                <Form.Control name="date" placeholder="Date" onChange={this.onChange} value={date} />
-              </Col>
-              <Col lg={true}>
-                <Form.Control name="referral" placeholder="Referral" onChange={this.onChange} value={referral} />
-              </Col>
-              <Col lg={true}>
-                <Form.Control name="source" placeholder="Source" onChange={this.onChange} value={source} />
-              </Col>
-            </Row>
-            <Button variant="dark" onClick={this.onSubmit}>Submit</Button>
-          </Form>
-        </div>
+      <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
       <Table responsive>
         <thead>
           <tr>
@@ -105,4 +97,9 @@ class JobTracker extends Component {
   }
 };
 
-export default JobTracker;
+
+
+export default JobTrackerPage;
+
+
+export { JobTracker }
