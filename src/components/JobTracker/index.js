@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   date: '',
   referral: '',
   source: '',
-  loading: false
+  loading: false,
 };
 
 const JobTracker = () => {
@@ -22,24 +22,25 @@ class JobTrackerBase extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { ...INITIAL_STATE }
+    this.state = { 
+      ...INITIAL_STATE
+     }
+  }
+
+  componentDidMount() {
+    this.getJobs();
   }
 
   onSubmit = (event) => {
     event.preventDefault();
     const {company, position, date, referral, source} = this.state;
-    // Send New Job Info to Firebase db
-    let count = 0;
     this.props.firebase.jobs(this.props.firebase.auth.O).push({
-      count: {
         company,
         position,
         date,
         referral,
         source,
-      }
     }).then(()=> {
-      this.getJobs();
       this.setState({
         ...INITIAL_STATE
       })
@@ -57,9 +58,6 @@ class JobTrackerBase extends Component {
     this.props.firebase.jobs(this.props.firebase.auth.O).on('value', snapshot => {
       const jobObject = snapshot.val();
       this.setState({jobs: jobObject});
-      for (var key in jobObject) {
-        console.log(key.job)
-      }
     })
   }
 
@@ -69,11 +67,11 @@ class JobTrackerBase extends Component {
         <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
         <JobTrackerTable jobs={this.state.jobs}/>
         <button onClick={this.getJobs}>Get Jobs</button>
+        <p>{JSON.stringify(this.state.jobs)}</p>
       </>
     )
   }
 };
-
 
 const JobTrackerPage = withFirebase(JobTrackerBase);
 
