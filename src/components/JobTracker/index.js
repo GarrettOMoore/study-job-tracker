@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import JobTrackerForm from './form'
 import JobTrackerTable from './table';
 import {withFirebase} from '../Firebase';
+import { compose } from 'recompose';
+import { withAuthentication, AuthUserContext } from '../Session';
 
 
 const INITIAL_STATE = {
@@ -11,11 +13,12 @@ const INITIAL_STATE = {
   referral: '',
   source: '',
   error: null,
+  uid: ''
 };
 
 const JobTracker = () => {
   return(
-    <JobTrackerPage />
+      <JobTrackerPage />
   )
 }
 class JobTrackerBase extends Component {
@@ -27,17 +30,22 @@ class JobTrackerBase extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const {company, position, date, referral, source} = this.state;
+    const {company, position, date, referral, source, uid} = this.state;
     // Send New Job Info to Firebase db
-    this.props.firebase.jobs.push({
-      company: company,
-      position: position,
-      date: date,
-      referral: referral,
-      source: source,
-    });
-    console.log("submit", this.state)
-    this.setState({ ...INITIAL_STATE });
+    this.props.firebase.jobs(this.props.firebase.auth.O).push({
+      job: {
+        company,
+        position,
+        date,
+        referral,
+        source,
+      }
+    }).then(()=> {
+      this.setState({
+        ...INITIAL_STATE
+      })
+      console.log("success");
+    })
   }
 
   onChange = event => {
@@ -47,18 +55,20 @@ class JobTrackerBase extends Component {
   };
 
   render() {
-
     return(
       <>
+      {/* <AuthUserContext.Consumer> */}
         <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
         <JobTrackerTable />
+      {/* </AuthUserContext.Consumer> */}
       </>
     )
   }
 };
 
 
-const JobTrackerPage = withFirebase(JobTrackerBase)
+const JobTrackerPage = withFirebase(JobTrackerBase);
+
 export default JobTracker;
 export { JobTrackerPage };
 
