@@ -25,7 +25,7 @@ const NavigationAuth = () => {
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link as={Link} to={ROUTES.LANDING}>Landing</Nav.Link> 
+            {/* <Nav.Link as={Link} to={ROUTES.LANDING}>Landing</Nav.Link>  */}
             <Nav.Link as={Link} to={ROUTES.HOME}>Home</Nav.Link> 
             <Nav.Link as={Link} to={ROUTES.JOB_TRACKER}>Job Tracker</Nav.Link>
             <Nav.Link as={Link} to={ROUTES.STUDY_PLANNER}>Study Planner</Nav.Link>
@@ -33,10 +33,6 @@ const NavigationAuth = () => {
             <Nav.Link as={Link} to={ROUTES.ADMIN}>Admin</Nav.Link> 
             <SignOutButton />
           </Nav>
-        {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light">Search</Button>
-        </Form> */}
       </Navbar>
   </div>
   )

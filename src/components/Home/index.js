@@ -3,7 +3,7 @@ import { withAuthorization } from '../Session';
 
 
 const HomePage = () => (
-  <p>HOME</p>
+  <p>&hearts;</p>
 );
 
 const condition = authUser => !!authUser;

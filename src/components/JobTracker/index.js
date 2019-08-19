@@ -55,6 +55,7 @@ class JobTrackerBase extends Component {
       this.setState({
         ...INITIAL_STATE
       })
+      this.getJobs();
     })
   }
 
@@ -78,7 +79,6 @@ class JobTrackerBase extends Component {
         <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
         <JobTrackerTable jobs={this.state.jobs}/>
         {loading && <div>Loading...</div>}
-        <button onClick={this.getJobs}>Get Jobs</button>
       </>
     )
   }

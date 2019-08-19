@@ -35,7 +35,7 @@ const JobTrackerTableBase = (props) => {
             <th>Company</th>
             <th>Position</th>
             <th>Date</th>
-            <th>Referral (If any):</th>
+            <th>Referral</th>
             <th>Source</th>
           </tr>
         </thead>
