@@ -28,7 +28,18 @@ class JobTrackerBase extends Component {
   }
 
   componentDidMount() {
-    this.getJobs();
+    this.setState({ loading: true });
+    this.props.firebase.jobs(this.props.firebase.auth.O).once('value', snapshot => {
+      let data = [];
+      const jobObject = snapshot.val();
+      for (let key in jobObject) {
+        data.push(jobObject[key])
+      }
+      this.setState({
+        jobs: data,
+        loading: false
+      });
+    })
   }
 
   onSubmit = (event) => {
@@ -44,7 +55,6 @@ class JobTrackerBase extends Component {
       this.setState({
         ...INITIAL_STATE
       })
-      console.log("success");
     })
   }
 
@@ -62,12 +72,13 @@ class JobTrackerBase extends Component {
   }
 
   render() {
+    const { loading } = this.state;
     return(
       <>
         <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
         <JobTrackerTable jobs={this.state.jobs}/>
+        {loading && <div>Loading...</div>}
         <button onClick={this.getJobs}>Get Jobs</button>
-        <p>{JSON.stringify(this.state.jobs)}</p>
       </>
     )
   }
