@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
-import {Navbar, Nav, Form, Button, FormControl} from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
 
 const Navigation = ({ authUser }) => {
   return(
@@ -43,13 +43,9 @@ const NavigationNonAuth = () => {
     <Navbar bg="primary" variant="dark">
       <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link to={ROUTES.SIGN_IN}>Sign In  </Nav.Link>  
-          <Nav.Link to={ROUTES.LANDING}>Landing </Nav.Link> 
+          <Nav.Link as={Link} to={ROUTES.SIGN_IN}>Sign In  </Nav.Link>  
+          <Nav.Link as={Link} to={ROUTES.LANDING}>Landing </Nav.Link> 
         </Nav>
-      <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-light">Search</Button>
-      </Form>
     </Navbar>
   )
 }

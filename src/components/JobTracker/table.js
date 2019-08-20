@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import Table from 'react-bootstrap/Table'
+import React from 'react';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 
 const JobTrackerTableBase = (props) => {
@@ -12,13 +13,20 @@ const JobTrackerTableBase = (props) => {
     return data.map((job, key) => {
       return (
         <>
-          <tr>
+          <tr key={key}>
             <td>{key + 1}</td>
             <td>{job.company}</td>
             <td>{job.position}</td>
             <td>{job.date}</td>
             <td>{job.referral}</td>
             <td>{job.source}</td>
+            <td><select>
+              <option value="no-response">No Response</option>
+              <option value="pass">Pass</option>
+              <option value="phone-screen">Phone Screen</option>
+              <option value="next-step">Next Step</option>
+            </select></td>
+            <td><Button variant="secondary" size="sm" onClick={() => props.delete(job.company)}>Remove</Button></td>
           </tr>
         </>
       )
@@ -37,6 +45,8 @@ const JobTrackerTableBase = (props) => {
             <th>Date</th>
             <th>Referral</th>
             <th>Source</th>
+            <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

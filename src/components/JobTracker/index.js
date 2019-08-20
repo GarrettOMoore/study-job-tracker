@@ -72,12 +72,16 @@ class JobTrackerBase extends Component {
     })
   }
 
+  handleDelete(id) {
+    console.log("delete", id)
+  }
+
   render() {
     const { loading } = this.state;
     return(
       <>
         <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
-        <JobTrackerTable jobs={this.state.jobs}/>
+        <JobTrackerTable jobs={this.state.jobs} delete={this.handleDelete}/>
         {loading && <div>Loading...</div>}
       </>
     )
