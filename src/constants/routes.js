@@ -6,4 +6,5 @@ export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
 export const JOB_TRACKER = '/jobtracker';
+export const EVENTS = '/events';
 export const STUDY_PLANNER = '/studyplanner';

@@ -10,23 +10,25 @@ const JobTrackerTableBase = (props) => {
     for (let key in props.jobs) {
       data.push(props.jobs[key])
     }
-    return data.map((job, key) => {
+    return data.map((job, index) => {
+    console.log(job);
       return (
         <>
-          <tr key={key}>
-            <td>{key + 1}</td>
+          <tr key={index}>
+            <td>{index + 1}</td>
             <td>{job.company}</td>
             <td>{job.position}</td>
             <td>{job.date}</td>
             <td>{job.referral}</td>
             <td>{job.source}</td>
-            <td><select>
-              <option value="no-response">No Response</option>
-              <option value="pass">Pass</option>
-              <option value="phone-screen">Phone Screen</option>
-              <option value="next-step">Next Step</option>
-            </select></td>
-            <td><Button variant="secondary" size="sm" onClick={() => props.delete(job.company)}>Remove</Button></td>
+            <td>
+              <select name="status" onChange={props.onChange}>
+                <option value="No Response">No Response</option>
+                <option value="Pass">Pass</option>
+                <option value="Phone Screen">Phone Screen</option>
+                <option value="Next Step">Next Step</option>
+              </select></td>
+            <td><Button variant="secondary" size="sm" onClick={() => props.delete(job.id)}>Remove</Button></td>
           </tr>
         </>
       )

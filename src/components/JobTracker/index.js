@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import JobTrackerForm from './form'
 import JobTrackerTable from './table';
 import {withFirebase} from '../Firebase';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const INITIAL_STATE = {
@@ -11,6 +12,7 @@ const INITIAL_STATE = {
   referral: '',
   source: '',
   loading: false,
+  status: 'No Response'
 };
 
 const JobTracker = () => {
@@ -33,6 +35,7 @@ class JobTrackerBase extends Component {
       let data = [];
       const jobObject = snapshot.val();
       for (let key in jobObject) {
+        jobObject[key].id = key;
         data.push(jobObject[key])
       }
       this.setState({
@@ -44,14 +47,16 @@ class JobTrackerBase extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const {company, position, date, referral, source} = this.state;
+    const {company, position, date, referral, source, status} = this.state;
     this.props.firebase.jobs(this.props.firebase.auth.O).push({
         company,
         position,
         date,
         referral,
         source,
-    }).then(()=> {
+        status,
+    }).then((obj)=> {
+      console.log("ID: ", obj.key);
       this.setState({
         ...INITIAL_STATE
       })
@@ -73,7 +78,13 @@ class JobTrackerBase extends Component {
   }
 
   handleDelete(id) {
-    console.log("delete", id)
+    console.log("delete", id);
+    // delete fbdb element by id here...
+  }
+
+  handleUpdate(id) {
+    console.log("update", id);
+    // update route to firebase here...
   }
 
   render() {
@@ -81,8 +92,8 @@ class JobTrackerBase extends Component {
     return(
       <>
         <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
-        <JobTrackerTable jobs={this.state.jobs} delete={this.handleDelete}/>
-        {loading && <div>Loading...</div>}
+        <JobTrackerTable jobs={this.state.jobs} delete={this.handleDelete} onChange={this.onChange}/>
+        {loading && <div><Spinner animation="grow" variant="dark" /></div>}
       </>
     )
   }

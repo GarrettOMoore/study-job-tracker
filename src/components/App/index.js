@@ -10,6 +10,7 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import JobTracker from '../JobTracker';
+import Events from '../Events';
 import StudyPlanner from '../StudyPlanner';
 
 import * as ROUTES from '../../constants/routes';
@@ -32,6 +33,7 @@ const App = () => {
               <Route path={ROUTES.ACCOUNT} component={AccountPage} />
               <Route path={ROUTES.ADMIN} component={AdminPage} />
               <Route path={ROUTES.JOB_TRACKER} component={JobTracker} />
+              <Route path={ROUTES.EVENTS} component={Events} />
               <Route path={ROUTES.STUDY_PLANNER} component={StudyPlanner} />
             </div>
           </Router>
