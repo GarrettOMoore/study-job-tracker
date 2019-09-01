@@ -69,6 +69,13 @@ class JobTrackerBase extends Component {
     });
   };
 
+  onStatusChange = (event) => {
+    console.log("IN CHANGE", event.target.value)
+    this.setState({
+      status: event.target.value
+    });
+  };
+
   getJobs = () => {
     this.props.firebase.jobs(this.props.firebase.auth.O).on('value', snapshot => {
       const jobObject = snapshot.val();
@@ -84,9 +91,14 @@ class JobTrackerBase extends Component {
       });
   }
 
-  handleUpdate(id) {
+  handleUpdate = (id) => {
     console.log("update", id);
     // update route to firebase here...
+    this.props.firebase.jobs(this.props.firebase.auth.O).child(id).update({status: this.state.status})
+    .then(() => {
+      console.log("successfully updated bb")
+      this.getJobs();
+    });
   }
 
   render() {
@@ -94,7 +106,7 @@ class JobTrackerBase extends Component {
     return(
       <>
         <JobTrackerForm onChange={this.onChange} onSubmit={this.onSubmit} jobVars={this.state} />
-        <JobTrackerTable jobs={this.state.jobs} delete={this.handleDelete} onChange={this.onChange}/>
+        <JobTrackerTable jobs={this.state.jobs} delete={this.handleDelete} onChange={this.onStatusChange} update={this.handleUpdate}/>
         {loading && <div><Spinner animation="grow" variant="dark" /></div>}
       </>
     )

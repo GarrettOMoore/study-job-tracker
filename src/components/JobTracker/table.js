@@ -21,12 +21,13 @@ const JobTrackerTableBase = (props) => {
             <td>{job.referral}</td>
             <td>{job.source}</td>
             <td>
-              <select name="status" onChange={props.onChange}>
+              <select name="status" onChange={props.onChange} value={job.status}>
                 <option value="No Response">No Response</option>
                 <option value="Pass">Pass</option>
                 <option value="Phone Screen">Phone Screen</option>
                 <option value="Next Step">Next Step</option>
               </select></td>
+            <td><Button variant="secondary" size="sm" onClick={() => props.update(job.id)}>Update Status</Button></td>
             <td><Button variant="secondary" size="sm" onClick={() => props.delete(job.id)}>Remove</Button></td>
           </tr>
         </>
