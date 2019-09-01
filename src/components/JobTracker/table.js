@@ -11,10 +11,9 @@ const JobTrackerTableBase = (props) => {
       data.push(props.jobs[key])
     }
     return data.map((job, index) => {
-    console.log(job);
       return (
         <>
-          <tr key={index}>
+          <tr key={job.id}>
             <td>{index + 1}</td>
             <td>{job.company}</td>
             <td>{job.position}</td>

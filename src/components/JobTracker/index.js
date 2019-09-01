@@ -56,7 +56,6 @@ class JobTrackerBase extends Component {
         source,
         status,
     }).then((obj)=> {
-      console.log("ID: ", obj.key);
       this.setState({
         ...INITIAL_STATE
       })
@@ -77,9 +76,12 @@ class JobTrackerBase extends Component {
     })
   }
 
-  handleDelete(id) {
+  handleDelete = (id) => {
     console.log("delete", id);
-    // delete fbdb element by id here...
+    this.props.firebase.jobs(this.props.firebase.auth.O).child(id).remove()
+      .then(() => {
+        this.getJobs();
+      });
   }
 
   handleUpdate(id) {
