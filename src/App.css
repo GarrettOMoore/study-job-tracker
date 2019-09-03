@@ -37,3 +37,7 @@ table {
 .react-bootstrap-table table {
 	table-layout: auto;
 	}
+
+.account-form * {
+	margin: 4px;
+}
