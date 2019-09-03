@@ -31,7 +31,7 @@ const NavigationAuth = () => {
             {/* <Nav.Link as={Link} to={ROUTES.EVENTS}>Events</Nav.Link> */}
             {/* <Nav.Link as={Link} to={ROUTES.STUDY_PLANNER}>Study Planner</Nav.Link> */}
             <Nav.Link as={Link} to={ROUTES.ACCOUNT}>Account</Nav.Link> 
-            <Nav.Link as={Link} to={ROUTES.ADMIN}>Admin</Nav.Link> 
+            {/* <Nav.Link as={Link} to={ROUTES.ADMIN}>Admin</Nav.Link>  */}
             <SignOutButton />
           </Nav>
       </Navbar>
