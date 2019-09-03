@@ -32,18 +32,6 @@ class JobTrackerBase extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    // this.props.firebase.jobs(this.props.firebase.auth.O).once('value', snapshot => {
-    //   let data = [];
-    //   const jobObject = snapshot.val();
-    //   for (let key in jobObject) {
-    //     jobObject[key].id = key;
-    //     data.push(jobObject[key])
-    //   }
-    //   this.setState({
-    //     jobs: data,
-    //     loading: false
-    //   });
-    // })
     this.getJobs();
   }
 
