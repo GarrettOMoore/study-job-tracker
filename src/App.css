@@ -3,9 +3,11 @@
   text-align: center;
 	height: 100vh;
 	margin: 2rem 0;
+	font-size: 1.3rem;
+	font-family: 'Open Sans Condensed', sans-serif;
 }
 
-h1 {
+h1, h2, h3 {
 	margin: 3rem;
 }
 
@@ -41,3 +43,4 @@ table {
 .account-form * {
 	margin: 4px;
 }
+

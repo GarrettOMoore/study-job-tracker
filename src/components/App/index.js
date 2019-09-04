@@ -22,7 +22,8 @@ const App = () => {
         <main className="App">
           <Router>
             <div>
-              <h1>React/Firebase Job Tracker</h1>
+              <h1>Job Tracker</h1>
+              <h3>Built With React + Firebase</h3>
               <Navigation />
               <Route exact path={ROUTES.LANDING} component={LandingPage} />
               <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
