@@ -25,7 +25,7 @@ const App = () => {
               <h1>Job Tracker</h1>
               <h3>Built With React + Firebase</h3>
               <Navigation />
-              <Route exact path={ROUTES.LANDING} component={LandingPage} />
+              <Route exact path={ROUTES.LANDING} component={HomePage} />
               <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
               <Route path={ROUTES.SIGN_IN} component={SignInPage} />
               <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
